@@ -14,6 +14,4 @@ public class Produto {
         this.Descricao = descricao;
         this.Foto = foto;
     }
-
-    public Produto() {}
 }
