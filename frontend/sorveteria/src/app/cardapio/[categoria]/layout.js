@@ -5,7 +5,7 @@ export const metadata = {
 
 export default function CardapioLayout({children}) {
     return (
-        <section>
+        <section className="w-screen h-screen">
             {children}
         </section>
     )
