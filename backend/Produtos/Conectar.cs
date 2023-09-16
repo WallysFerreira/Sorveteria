@@ -50,4 +50,30 @@ public class Conectar {
         return produtos;
     }
 
+    public static async Task<Produto?> DeletarUm(int id) {
+        //List<Produto> lista = new();
+        Produto? prod = null; 
+
+        try {
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
+            await connection.OpenAsync();
+
+            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
+            querySelectUm.Parameters.AddWithValue("p", id);
+
+            var reader = await querySelectUm.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync()) {
+                //Produto prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                //lista.Add(prod);
+                prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+            }
+
+        } catch (Exception e) {
+            Console.WriteLine(e);
+        }
+        //return lista;
+        return prod;
+    }
+
 }
