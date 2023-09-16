@@ -1,8 +1,11 @@
 import CardCategoria from '@/app/components/cardcategoria'
+import Nav from './components/nav'
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-between items-center min-h-screen p-24">
+    <section>
+    <Nav></Nav>
+    <main className="flex flex-col justify-between items-center h-[95vh] p-24">
       <h1 className='text-6xl'>Bem vindo à Sorveteria Dwitti</h1>
       <div className='flex flex-col items-center justify-center w-full'>
         <h2 className='text-3xl mb-10'>Conheça nosso cardápio</h2>
@@ -13,5 +16,6 @@ export default function Home() {
         </div>
       </div>
     </main>
+    </section>
   )
 }
