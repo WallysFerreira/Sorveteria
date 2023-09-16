@@ -4,14 +4,14 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Sorveteria',
-  description: 'Sorveteria',
+  title: 'Sorveteria Dwitti',
+  description: 'Sorveteria Dwitti',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body className={`${inter.className} w-full h-full`}>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
