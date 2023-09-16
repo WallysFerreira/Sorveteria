@@ -5,7 +5,7 @@ using Produtos.Models;
 namespace Produtos.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ProdutosController : ControllerBase {
     private readonly ILogger<ProdutosController> _logger;
     public ProdutosController(ILogger<ProdutosController> logger) {
