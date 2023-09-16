@@ -7,7 +7,7 @@ export default function LoginLayout({
     children,
 }) {
     return (
-        <section>
+        <section className="h-screen flex justify-center items-center">
             {children}
         </section>
     )
