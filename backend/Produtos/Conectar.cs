@@ -24,8 +24,8 @@ public class Conectar {
         }
     }
 
-    public static async List<Produto> PegarTodos() {
-        List<Produto> produtos = new List<Produto>();
+    public static async Task<List<Produto>> PegarTodos() {
+        List<Produto> produtos = new();
 
         try {
             var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
@@ -38,7 +38,6 @@ public class Conectar {
                 Produto prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
                 produtos.Add(prod);
             }
-
         } catch (Exception e) {
             Console.WriteLine(e);
         }

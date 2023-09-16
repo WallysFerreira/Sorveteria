@@ -22,9 +22,9 @@ public class ProdutosController : ControllerBase {
     }
 
     [HttpGet]
-    public IEnumerable<List<Produto>> Get() {
+    public async Task<IEnumerable<Produto>> Get() {
         List<Produto> lista = await Conectar.PegarTodos();
 
-        return Ok(lista);
+        return lista;
     }
 }
