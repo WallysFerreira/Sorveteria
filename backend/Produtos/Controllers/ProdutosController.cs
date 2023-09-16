@@ -20,4 +20,11 @@ public class ProdutosController : ControllerBase {
 
         return CreatedAtAction(null, prod);
     }
+
+    [HttpGet]
+    public IEnumerable<List<Produto>> Get() {
+        List<Produto> lista = await Conectar.PegarTodos();
+
+        return Ok(lista);
+    }
 }
