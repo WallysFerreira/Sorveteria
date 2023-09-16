@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "4gnVPB9S72+W7F+rnRy5DlHTfTzYPk09B6S5nHoUb4+IPGqdHDSadRbtmjRDw0k+ywEozZT1JzO4u+unAthILw==",
+  "dgSpecHash": "1p9caKzJIwOPPUeQv9shiUBUUuPNXwF/fptB4mTI4yf5tc6VsFufJyCQNozS9A7MRZ5sWVbdbj4csv60lG6qvQ==",
   "success": true,
   "projectFilePath": "/home/wallysf/Área de trabalho/Sorveteria/backend/Produtos/Produtos.csproj",
   "expectedPackageFiles": [
     "/home/wallysf/.nuget/packages/microsoft.aspnetcore.openapi/7.0.10/microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
     "/home/wallysf/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/home/wallysf/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/home/wallysf/.nuget/packages/mysqlconnector/2.2.7/mysqlconnector.2.2.7.nupkg.sha512",
     "/home/wallysf/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/home/wallysf/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/home/wallysf/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",

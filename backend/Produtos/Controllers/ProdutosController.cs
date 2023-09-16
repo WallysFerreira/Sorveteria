@@ -12,15 +12,12 @@ public class ProdutosController : ControllerBase {
         _logger = logger;
     } 
 
-    [HttpGet]
-    public IEnumerable<Produto> Get() {
-        return Enumerable.Range(1,3).Select(index => new Produto {
-            Categoria = "Sorvetes",
-            Nome = "Flocos",
-            Preco = 10.0f,
-            Descricao = "Sorvete de flocos",
-            Foto = "/flocos.jpg",
-        }).ToArray();
-    }
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public ActionResult<Produto> Post(Produto prod) {
+        Conectar.Inserir(prod);
 
+        return CreatedAtAction(null, prod);
+    }
 }

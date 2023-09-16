@@ -31,3 +31,4 @@
 /home/wallysf/Área de trabalho/Sorveteria/backend/Produtos/obj/Debug/net7.0/Produtos.pdb
 /home/wallysf/Área de trabalho/Sorveteria/backend/Produtos/obj/Debug/net7.0/Produtos.genruntimeconfig.cache
 /home/wallysf/Área de trabalho/Sorveteria/backend/Produtos/obj/Debug/net7.0/ref/Produtos.dll
+/home/wallysf/Área de trabalho/Sorveteria/backend/Produtos/bin/Debug/net7.0/MySqlConnector.dll
