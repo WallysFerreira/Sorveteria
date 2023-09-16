@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using MySqlConnector;
 using Produtos.Models;
 
@@ -19,6 +20,8 @@ public class Conectar {
             queryInsert.Parameters.AddWithValue("f", prod.Foto);
 
             await queryInsert.ExecuteNonQueryAsync();
+
+            connection.Close();
         } catch (Exception e) {
             Console.WriteLine(e);
         }
@@ -38,10 +41,13 @@ public class Conectar {
                 Produto prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
                 produtos.Add(prod);
             }
+
+            connection.Close();
         } catch (Exception e) {
             Console.WriteLine(e);
         }
 
         return produtos;
     }
+
 }
