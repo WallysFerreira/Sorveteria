@@ -41,10 +41,17 @@ public class ProdutosController : ControllerBase {
     }
 
     [HttpPatch("{id}")]
-    public IActionResult Atualizar(int id, JsonDocument mudanca) {
-        var campo = mudanca.RootElement.GetProperty("campo");
-        var valor = mudanca.RootElement.GetProperty("valor");
+    public async Task<ActionResult<Produto>> Atualizar(int id, JsonDocument mudanca) {
+        var campo = mudanca.RootElement.GetProperty("campo").ToString();
+        var valor = mudanca.RootElement.GetProperty("valor").ToString();
 
-        return NoContent();
+
+        Produto? prod = await Conectar.AtualizarUm(id, campo, valor);
+
+        if (prod == null) {
+            return NotFound();
+        }
+        
+        return prod;
     }
 }
