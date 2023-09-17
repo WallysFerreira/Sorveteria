@@ -56,6 +56,14 @@ public class ProdutosController : ControllerBase {
     }
 
     [HttpPut("{id}")]
-    public void AtualizarProduto(int id, Produto prod) {
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Produto>> AtualizarProduto(int id, Produto prod) {
+        Produto? produto = await Conectar.AtualizarProduto(id, prod);
+
+        if (produto == null) {
+            return NotFound();
+        }
+
+        return produto;
     }
 }
