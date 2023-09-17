@@ -51,16 +51,3 @@ export default function ListaProdutos({ produtos }) {
         </>
     )
 }
-/*
-{ useEffect(() => {
-                    if (visivel) {
-                        return (
-                        <FormAdicionarProduto styling="ml-32" />
-                        )
-                    } else {
-                        return (
-                        <FormAdicionarProduto styling="hidden" />
-                        )
-                    }
-                }, [visivel])}
-*/
