@@ -1,12 +1,12 @@
 import CardProduto from "@/app/components/cardproduto"
 
-export async function getData() {
+export async function getListaProdutos() {
     const produtos = await fetch('http://localhost:5172/api/produtos').then((res) => res.json())
 
     return produtos
 }
 export async function generateStaticParams() {
-    const produtos = await getData()
+    const produtos = await getListaProdutos()
 
     return produtos.map((produto) => ({
         categoria: produto.categoria,
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-    const produtos = await getData()
+    const produtos = await getListaProdutos()
 
     return (
         <section className="p-2 flex flex-wrap h-full w-full">
