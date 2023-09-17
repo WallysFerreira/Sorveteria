@@ -41,7 +41,7 @@ public class ProdutosController : ControllerBase {
     }
 
     [HttpPatch("{id}")]
-    public async Task<ActionResult<Produto>> Atualizar(int id, JsonDocument mudanca) {
+    public async Task<ActionResult<Produto>> AtualizarCampo(int id, JsonDocument mudanca) {
         var campo = mudanca.RootElement.GetProperty("campo").ToString();
         var valor = mudanca.RootElement.GetProperty("valor").ToString();
 
@@ -53,5 +53,9 @@ public class ProdutosController : ControllerBase {
         }
         
         return prod;
+    }
+
+    [HttpPut("{id}")]
+    public void AtualizarProduto(int id, Produto prod) {
     }
 }
