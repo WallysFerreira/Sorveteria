@@ -8,8 +8,8 @@ export default async function Page() {
 
     return (
         <section className="h-screen flex justify-center items-center">
-            <div className="border-2 rounded-lg p-11">
-            <table className="table-fixed" >
+            <div className="border-2 rounded-lg p-11 flex flex-col items-center">
+            <table className="table-fixed border-separate" >
                 <thead>
                     <tr>
                         <th className="border">Categoria</th>
@@ -29,14 +29,15 @@ export default async function Page() {
                                 <td className="border">{produto.descricao}</td>
                                 <td className="border">{produto.foto}</td>
                                 <td>
-                                    <Link className="mr-5 ml-2" key={idx} href={`/produtos/editar/${idx}`}>Editar</Link>
-                                    <Link href={`/excluir/{id}`}>Excluir</Link>
+                                    <Link className="mr-5 ml-2 border bg-yellow-300 p-1" key={idx} href={`/produtos/editar/${idx}`}>Editar</Link>
+                                    <Link className="border bg-red-500 p-1" href={`/excluir/{id}`}>Excluir</Link>
                                 </td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
+            <button className="border mt-6 bg-green-500 w-[10%] h-11">Novo</button>
             </div>
         </section>
     )
