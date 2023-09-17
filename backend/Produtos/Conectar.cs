@@ -69,6 +69,20 @@ public class Conectar {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
             }
 
+            connection.Close();
+
+            if (prod == null) {
+                return prod;
+            }
+
+            await connection.OpenAsync();
+
+            var queryDelete = new MySqlCommand("DELETE FROM Produtos WHERE ID = (@p)", connection);
+            queryDelete.Parameters.AddWithValue("p", id);
+
+            await queryDelete.ExecuteNonQueryAsync();
+
+            connection.Close();
         } catch (Exception e) {
             Console.WriteLine(e);
         }
