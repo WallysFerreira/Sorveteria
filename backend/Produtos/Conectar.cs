@@ -85,7 +85,7 @@ public class Conectar {
         return prod;
     }
 
-    public static async Task<Produto?> AtualizarUm(int id, string campo, string valor) {
+    public static async Task<Produto?> AtualizarCampo(int id, string campo, string valor) {
         Produto? prod = null; 
 
         try {
@@ -112,6 +112,57 @@ public class Conectar {
             var queryUpdate = new MySqlCommand("UPDATE Produtos SET " + campo + " = @v WHERE ID = @p", connection);
             queryUpdate.Parameters.AddWithValue("p", id);
             queryUpdate.Parameters.AddWithValue("v", campo != "preco" ? valor : float.Parse(valor));
+
+            await queryUpdate.ExecuteNonQueryAsync();
+
+            connection.Close();
+
+            await connection.OpenAsync();
+
+            reader = await querySelectUm.ExecuteReaderAsync();
+            while (await reader.ReadAsync()) {
+                prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+            }
+
+            connection.Close();
+        } catch (Exception e) {
+            Console.WriteLine(e);
+        }
+
+        return prod;
+    }
+
+    public static async Task<Produto?> AtualizarProduto(int id, Produto produto) {
+        Produto? prod = null; 
+
+        try {
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
+            await connection.OpenAsync();
+
+            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
+            querySelectUm.Parameters.AddWithValue("p", id);
+
+            var reader = await querySelectUm.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync()) {
+                prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+            }
+
+            connection.Close();
+
+            if (prod == null) {
+                return null;
+            }
+
+            await connection.OpenAsync();
+
+            var queryUpdate = new MySqlCommand("UPDATE Produtos SET (categoria, nome, descricao, preco, foto) = (@c, @n, @d, @p, @f) WHERE ID = @i", connection);
+            queryUpdate.Parameters.AddWithValue("i", id);
+            queryUpdate.Parameters.AddWithValue("c", produto.Categoria);
+            queryUpdate.Parameters.AddWithValue("n", produto.Nome);
+            queryUpdate.Parameters.AddWithValue("d", produto.Descricao);
+            queryUpdate.Parameters.AddWithValue("p", produto.Preco);
+            queryUpdate.Parameters.AddWithValue("f", produto.Foto);
 
             await queryUpdate.ExecuteNonQueryAsync();
 
