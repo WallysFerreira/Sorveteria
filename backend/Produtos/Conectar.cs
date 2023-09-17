@@ -62,8 +62,6 @@ public class Conectar {
             var reader = await querySelectUm.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
-                //Produto prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
-                //lista.Add(prod);
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
             }
 
