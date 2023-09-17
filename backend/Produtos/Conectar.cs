@@ -51,7 +51,6 @@ public class Conectar {
     }
 
     public static async Task<Produto?> DeletarUm(int id) {
-        //List<Produto> lista = new();
         Produto? prod = null; 
 
         try {
@@ -86,7 +85,6 @@ public class Conectar {
         } catch (Exception e) {
             Console.WriteLine(e);
         }
-        //return lista;
         return prod;
     }
 
