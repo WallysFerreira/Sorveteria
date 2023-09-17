@@ -29,7 +29,7 @@ export default async function Page() {
                                 <td className="border">{produto.descricao}</td>
                                 <td className="border">{produto.foto}</td>
                                 <td>
-                                    <Link className="mr-5" key={idx} href={`/produtos/editar/${idx}`}>Editar</Link>
+                                    <Link className="mr-5 ml-2" key={idx} href={`/produtos/editar/${idx}`}>Editar</Link>
                                     <Link href={`/excluir/{id}`}>Excluir</Link>
                                 </td>
                             </tr>
