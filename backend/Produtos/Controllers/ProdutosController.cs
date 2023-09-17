@@ -46,7 +46,7 @@ public class ProdutosController : ControllerBase {
         var valor = mudanca.RootElement.GetProperty("valor").ToString();
 
 
-        Produto? prod = await Conectar.AtualizarUm(id, campo, valor);
+        Produto? prod = await Conectar.AtualizarCampo(id, campo, valor);
 
         if (prod == null) {
             return NotFound();

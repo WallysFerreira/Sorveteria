@@ -156,7 +156,7 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            var queryUpdate = new MySqlCommand("UPDATE Produtos SET (categoria, nome, descricao, preco, foto) = (@c, @n, @d, @p, @f) WHERE ID = @i", connection);
+            var queryUpdate = new MySqlCommand("UPDATE Produtos SET categoria = @c, nome = @n, descricao = @d, preco = @p, foto = @f WHERE ID = @i", connection);
             queryUpdate.Parameters.AddWithValue("i", id);
             queryUpdate.Parameters.AddWithValue("c", produto.Categoria);
             queryUpdate.Parameters.AddWithValue("n", produto.Nome);
