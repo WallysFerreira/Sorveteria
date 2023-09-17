@@ -39,4 +39,12 @@ public class ProdutosController : ControllerBase {
         
         return prod;
     }
+
+    [HttpPatch("{id}")]
+    public IActionResult Atualizar(int id, JsonDocument mudanca) {
+        var campo = mudanca.RootElement.GetProperty("campo");
+        var valor = mudanca.RootElement.GetProperty("valor");
+
+        return NoContent();
+    }
 }
