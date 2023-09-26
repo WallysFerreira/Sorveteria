@@ -1,9 +1,9 @@
 export const metadata = {
-    title: "Login",
+    title: "Login/Cadastro",
     description: "Faça login na plataforma",
 }
 
-export default function LoginLayout({
+export default function FormsLayout({
     children,
 }) {
     return (
