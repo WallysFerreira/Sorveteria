@@ -79,6 +79,7 @@ public class Conectar {
 
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
             }
 
             connection.Close();
