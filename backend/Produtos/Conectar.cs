@@ -5,7 +5,7 @@ using Produtos.Models;
 namespace Produtos;
 
 public class Conectar {
-    public static async void Inserir(Produto prod) {
+    public static async Task<Produto?> Inserir(Produto prod) {
 
         try {
             var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
@@ -21,9 +21,48 @@ public class Conectar {
             await queryInsert.ExecuteNonQueryAsync();
 
             connection.Close();
+
+            await connection.OpenAsync();
+
+            var querySelectUm = new MySqlCommand("SELECT ID FROM Produtos WHERE Nome = (@n)", connection);
+            querySelectUm.Parameters.AddWithValue("n", prod.Nome);
+
+            var reader = await querySelectUm.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync()) {
+                prod.Id = reader.GetInt16(0);
+            }
+
+        } catch (Exception e) {
+            Console.WriteLine(e);
+            return null;
+        }
+
+        return prod;
+    }
+
+    public static async Task<Produto?> PegarUm(int id) {
+        Produto? prod = null;
+        try {
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
+            await connection.OpenAsync();
+
+            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
+            querySelectUm.Parameters.AddWithValue("p", id);
+
+            var reader = await querySelectUm.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync()) {
+                prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
+            }
+
+            connection.Close();
         } catch (Exception e) {
             Console.WriteLine(e);
         }
+
+        return prod;
     }
 
     public static async Task<List<Produto>> PegarTodos() {
@@ -38,6 +77,7 @@ public class Conectar {
 
             while (await reader.ReadAsync()) {
                 Produto prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
                 produtos.Add(prod);
             }
 
@@ -63,6 +103,7 @@ public class Conectar {
 
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
             }
 
             connection.Close();
@@ -122,6 +163,7 @@ public class Conectar {
             reader = await querySelectUm.ExecuteReaderAsync();
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
             }
 
             connection.Close();
@@ -173,6 +215,7 @@ public class Conectar {
             reader = await querySelectUm.ExecuteReaderAsync();
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
             }
 
             connection.Close();

@@ -15,10 +15,10 @@ public class ProdutosController : ControllerBase {
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<Produto> Post(Produto prod) {
-        Conectar.Inserir(prod);
+    public async Task<ActionResult<Produto>> Post(Produto prod) {
+        Produto? p = await Conectar.Inserir(prod);
 
-        return CreatedAtAction(null, prod);
+        return CreatedAtAction(null, p);
     }
 
     [HttpGet]
@@ -26,6 +26,17 @@ public class ProdutosController : ControllerBase {
         List<Produto> lista = await Conectar.PegarTodos();
 
         return lista;
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Produto>> GetUm(int id) {
+        Produto? p = await Conectar.PegarUm(id);
+
+        if (p == null) {
+            return NotFound();
+        }
+
+        return p;
     }
 
     [HttpDelete("{id}")]
