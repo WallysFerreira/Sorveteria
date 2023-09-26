@@ -5,7 +5,7 @@ using Produtos.Models;
 namespace Produtos;
 
 public class Conectar {
-    public static async void Inserir(Produto prod) {
+    public static async Task<Produto?> Inserir(Produto prod) {
 
         try {
             var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
@@ -21,9 +21,24 @@ public class Conectar {
             await queryInsert.ExecuteNonQueryAsync();
 
             connection.Close();
+
+            await connection.OpenAsync();
+
+            var querySelectUm = new MySqlCommand("SELECT ID FROM Produtos WHERE Nome = (@n)", connection);
+            querySelectUm.Parameters.AddWithValue("n", prod.Nome);
+
+            var reader = await querySelectUm.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync()) {
+                prod.Id = reader.GetInt16(0);
+            }
+
         } catch (Exception e) {
             Console.WriteLine(e);
+            return null;
         }
+
+        return prod;
     }
 
     public static async Task<List<Produto>> PegarTodos() {
