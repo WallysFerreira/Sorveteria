@@ -41,6 +41,30 @@ public class Conectar {
         return prod;
     }
 
+    public static async Task<Produto?> PegarUm(int id) {
+        Produto? prod = null;
+        try {
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
+            await connection.OpenAsync();
+
+            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
+            querySelectUm.Parameters.AddWithValue("p", id);
+
+            var reader = await querySelectUm.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync()) {
+                prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod.Id = reader.GetInt16(0);
+            }
+
+            connection.Close();
+        } catch (Exception e) {
+            Console.WriteLine(e);
+        }
+
+        return prod;
+    }
+
     public static async Task<List<Produto>> PegarTodos() {
         List<Produto> produtos = new();
 

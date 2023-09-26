@@ -28,6 +28,17 @@ public class ProdutosController : ControllerBase {
         return lista;
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Produto>> GetUm(int id) {
+        Produto? p = await Conectar.PegarUm(id);
+
+        if (p == null) {
+            return NotFound();
+        }
+
+        return p;
+    }
+
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Produto>> Delete(int id) {
