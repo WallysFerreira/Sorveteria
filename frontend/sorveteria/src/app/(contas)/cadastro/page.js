@@ -20,7 +20,7 @@ export default function Page() {
 
             <div className="flex flex-col">
                 <label htmlFor="senha">Senha</label>
-                <input className="border-2" type="senha" name="senha" id="senha" required />
+                <input className="border-2" type="password" name="senha" id="senha" required />
             </div>
 
             <button className="border-2" type="submit">Cadastrar</button>
