@@ -25,7 +25,7 @@ export default function ListaProdutos({ produtos }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {produtos.map((produto, idx) => {
+                    {produtos.map((produto) => {
                         return (
                             <tr>
                                 <td className="border">{produto.categoria}</td>
@@ -34,7 +34,7 @@ export default function ListaProdutos({ produtos }) {
                                 <td className="border">{produto.descricao}</td>
                                 <td className="border">{produto.foto}</td>
                                 <td>
-                                    <Link className="mr-5 ml-2 border bg-yellow-300 p-1" key={idx} href={`/produtos/editar/${idx}`}>Editar</Link>
+                                    <Link className="mr-5 ml-2 border bg-yellow-300 p-1" key={produto.Id} href={`/produtos/editar/${produto.Id}`}>Editar</Link>
                                     <Link className="border bg-red-500 p-1" href={`/excluir/{id}`}>Excluir</Link>
                                 </td>
                             </tr>
