@@ -18,7 +18,7 @@ export default function FormAdicionarProduto({ styling }) {
 
             <div className="flex flex-col">
             <label htmlFor="descricao">Descrição</label>
-            <input className="border" id="descricao" name="preco" ></input>
+            <input className="border" id="descricao" name="descricao" ></input>
             </div>
 
             <div className="flex flex-col">
