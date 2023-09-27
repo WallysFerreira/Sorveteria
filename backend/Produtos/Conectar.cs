@@ -8,7 +8,7 @@ public class Conectar {
     public static async Task<Produto?> Inserir(Produto prod) {
 
         try {
-            var connection = new MySqlConnection("Server=produtosdb;User ID=root;Password=root;Database=Produtos");
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
             var queryInsert = new MySqlCommand("INSERT INTO Produtos (Categoria, Nome, Preco, Descricao, Foto) VALUES (@c, @n, @p, @d, @f)", connection);
@@ -44,7 +44,7 @@ public class Conectar {
     public static async Task<Produto?> PegarUm(int id) {
         Produto? prod = null;
         try {
-            var connection = new MySqlConnection("Server=produtosdb;User ID=root;Password=root;Database=Produtos");
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
             var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
@@ -69,7 +69,7 @@ public class Conectar {
         List<Produto> produtos = new();
 
         try {
-            var connection = new MySqlConnection("Server=produtosdb;User ID=root;Password=root;Database=Produtos");
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
             var querySelect = new MySqlCommand("SELECT * FROM Produtos", connection);
@@ -93,7 +93,7 @@ public class Conectar {
         Produto? prod = null; 
 
         try {
-            var connection = new MySqlConnection("Server=produtosdb;User ID=mysql;Database=Produtos");
+            var connection = new MySqlConnection("Server=localhost;User ID=mysql;Database=Produtos");
             await connection.OpenAsync();
 
             var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);

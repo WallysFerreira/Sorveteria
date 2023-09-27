@@ -15,4 +15,12 @@ public class Produto {
         this.Descricao = descricao;
         this.Foto = foto;
     }
+
+    public Produto() {
+        this.Categoria = "";
+        this.Nome = "";
+        this.Preco = 0;
+        this.Descricao = "";
+        this.Foto = "";
+    }
 }
