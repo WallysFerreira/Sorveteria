@@ -1,7 +1,7 @@
 export default function FormAtualizarProduto({ produto }) {
     return (
         <div className="h-screen w-screen flex justify-center items-center">
-        <form className="flex flex-col justify-center items-center">
+        <form action="https://localhost:5172/api/produtos/" method="put" className="flex flex-col justify-center items-center">
             <div className="flex flex-col">
             <label htmlFor="categoria">Categoria</label>
             <input className="border" id="categoria" name="categoria" placeholder={produto.categoria}></input>
