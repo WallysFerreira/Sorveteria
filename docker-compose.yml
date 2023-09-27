@@ -1,0 +1,31 @@
+services:
+  front:
+    image: "wallysf/sorveteria-front:1"
+    ports:
+      - "80:3000"
+  produtos:
+    image: "wallysf/sorveteria-produtos:2"
+    ports:
+      - "5001:80"
+  produtosdb:
+    image: "mariadb:latest"
+    container_name: produtosdb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MARIADB_DATABASE: Produtos
+      MYSQL_DATABASE: Produtos
+    expose:
+      - "3306"
+    command: --init-file /data/application/initprodutos.sql
+    volumes:
+      - ./sql/initprodutos.sql:/data/application/initprodutos.sql
+      - produtos-data:/var/lib/mysql
+  compras:
+    image: "wallysf/sorveteria-compras:1"
+    ports:
+      - "5002:80"
+    
+  
+volumes:
+  produtos-data:
