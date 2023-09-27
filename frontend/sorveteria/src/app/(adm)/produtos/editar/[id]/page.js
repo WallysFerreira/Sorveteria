@@ -4,15 +4,15 @@ import FormAtualizarProduto from "@/app/components/formatualizarproduto";
 export async function generateStaticParams() {
     const produtos = await getListaProdutos();
 
-    return produtos.map((_, idx) => ({
-        id: idx.toString(),
+    return produtos.map((prod) => ({
+        id: prod.Id,
+        produto: prod,
     }))
 }
 
 // Mostrar um formulario para editar um produto especifico
 export default async function Page({ params }) {
-    const produtos = await getListaProdutos()
-    const produto = produtos[params.id]
+    const produto = params.produto
 
     return (
         <FormAtualizarProduto produto={produto} />
