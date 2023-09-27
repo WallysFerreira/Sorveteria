@@ -16,7 +16,17 @@ public class ProdutosController : ControllerBase {
     [Consumes("application/x-www-form-urlencoded")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Produto>> Post([FromForm] Produto prod) {
+    public async Task<ActionResult<Produto>> PostForm([FromForm] Produto prod) {
+        Produto? p = await Conectar.Inserir(prod);
+
+        return CreatedAtAction(null, p);
+    }
+
+    [HttpPost]
+    [Consumes("application/json")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Produto>> Post(Produto prod) {
         Produto? p = await Conectar.Inserir(prod);
 
         return CreatedAtAction(null, p);
