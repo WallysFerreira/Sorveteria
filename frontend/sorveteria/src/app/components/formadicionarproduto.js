@@ -1,6 +1,6 @@
 export default function FormAdicionarProduto({ styling }) {
     return (
-        <form id="adicionarProduto" className={styling}>
+        <form action="http://localhost:5172/api/produtos" method="post" id="adicionarProduto" className={styling}>
             <div className="flex flex-col">
             <label htmlFor="categoria">Categoria</label>
             <input className="border" id="categoria" name="categoria" ></input>
