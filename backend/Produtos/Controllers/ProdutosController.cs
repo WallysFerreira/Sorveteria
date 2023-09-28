@@ -78,8 +78,9 @@ public class ProdutosController : ControllerBase {
     }
 
     [HttpPut("{id}")]
+    [Consumes("multipart/form-data")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Produto>> AtualizarProduto(int id, Produto prod) {
+    public async Task<ActionResult<Produto>> AtualizarProduto(int id, [FromForm] Produto prod) {
         Produto? produto = await Conectar.AtualizarProduto(id, prod);
 
         if (produto == null) {
