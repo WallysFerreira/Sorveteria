@@ -54,7 +54,6 @@ public class ProdutosController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Produto>> Delete(int id) {
         Produto? prod = await Conectar.DeletarUm(id);
-        Console.WriteLine(id);
 
         if (prod == null) {
             return NotFound();
