@@ -3,6 +3,7 @@
 import Link from "next/link"
 import FormAdicionarProduto from "./formadicionarproduto"
 import { useEffect, useState } from "react"
+import { Router } from "next/router"
 
 export default function ListaProdutos({ produtos }) {
     const [visivel, setVisivel] = useState(false)
@@ -35,7 +36,13 @@ export default function ListaProdutos({ produtos }) {
                                 <td className="border">{produto.foto}</td>
                                 <td>
                                     <Link className="mr-5 ml-2 border bg-yellow-300 p-1" key={produto.Id} href={`/produtos/editar/${produto.Id}`}>Editar</Link>
-                                    <Link className="border bg-red-500 p-1" href={`/excluir/{id}`}>Excluir</Link>
+                                    <Link className="border bg-red-500 p-1" href="/produtos" onClick={() => {
+                                        fetch(`http://localhost:5172/api/produtos/${produto.id}`, {
+                                            method: 'DELETE'
+                                        })
+
+                                        Router.reload()
+                                    }}>Excluir</Link>
                                 </td>
                             </tr>
                         )

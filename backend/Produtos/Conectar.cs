@@ -93,7 +93,7 @@ public class Conectar {
         Produto? prod = null; 
 
         try {
-            var connection = new MySqlConnection("Server=localhost;User ID=mysql;Database=Produtos");
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
             var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
