@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 
 // Mostrar um formulario para editar um produto especifico
 export default async function Page({ params }) {
-    const produto = await fetch(`http://localhost:5172/api/produtos/${params.id}`).then((res) => res.json())
+    const produto = await fetch(`http://${process.env.URL_PRODUTOS}:${process.env.PORT_PRODUTOS}/api/produtos/${params.id}`).then((res) => res.json())
 
     return (
         <FormAtualizarProduto produto={produto} />

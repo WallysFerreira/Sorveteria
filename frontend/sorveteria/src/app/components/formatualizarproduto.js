@@ -5,7 +5,7 @@ export default function FormAtualizarProduto({ produto }) {
         e.preventDefault()
 
         const formData = new FormData(document.getElementById('formAtualizar'))
-        await fetch(`http://localhost:5172/api/produtos/${produto.id}`, {
+        await fetch(`http://${process.env.URL_PRODUTOS}:${process.env.PORT_PRODUTOS}/api/produtos/${produto.id}`, {
             method: 'PUT',
             body: formData,
         })

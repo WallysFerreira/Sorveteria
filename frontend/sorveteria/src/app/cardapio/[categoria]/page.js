@@ -1,7 +1,7 @@
 import CardProduto from "@/app/components/cardproduto"
 
 export async function getListaProdutos() {
-    const produtos = await fetch('http://localhost:5172/api/produtos').then((res) => res.json())
+    const produtos = await fetch(`http://${process.env.URL_PRODUTOS}:${process.env.PORT_PRODUTOS}/api/produtos`).then((res) => res.json())
 
     return produtos
 }
