@@ -67,7 +67,6 @@ public class Conectar {
     }
 
     public static async Task<List<Produto>> PegarTodos() {
-        Console.WriteLine(url);
         List<Produto> produtos = new();
 
         try {
