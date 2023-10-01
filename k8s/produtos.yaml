@@ -17,6 +17,9 @@ spec:
       containers:
       - name: produtos
         image: wallysf/sorveteria-produtos:v1.0
+        env:
+        - name: DB_URL
+          value: db
         ports:
         - containerPort: 80
 
@@ -27,10 +30,12 @@ kind: Service
 metadata:
   name: produtos-service
 spec:
+  type: NodePort
   selector:
     app: produtos
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 30100
 
