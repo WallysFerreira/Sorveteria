@@ -5,13 +5,6 @@ export async function getListaProdutos() {
 
     return produtos
 }
-export async function generateStaticParams() {
-    const produtos = await getListaProdutos()
-
-    return produtos.map((produto) => ({
-        categoria: produto.categoria,
-    }))
-}
 
 export default async function Page({ params }) {
     const produtos = await getListaProdutos()
