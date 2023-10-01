@@ -21,7 +21,7 @@ spec:
         - name: URL_PRODUTOS
           value: produtos-service
         - name: PORT_PRODUTOS
-          value: 80
+          value: "80"
         ports:
         - containerPort: 3000
 
