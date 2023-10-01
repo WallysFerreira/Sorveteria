@@ -20,8 +20,32 @@ spec:
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: root
+        - name: MYSQL_DATABASE
+          value: Produtos
         ports:
         - containerPort: 3306
+      volumes:
+        - name: mysql-initdb
+          configMap:
+            name: mysql-initdb-config
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+data:
+  initdb.sql: |
+    USE Produtos;
+    CREATE TABLE IF NOT EXISTS Produtos (
+      ID INT PRIMARY KEY AUTO_INCREMENT,
+      categoria varchar(20),
+      nome varchar(30),
+      preco float,
+      descricao varchar(50),
+      foto varchar(20)
+    );
 
 ---
 
