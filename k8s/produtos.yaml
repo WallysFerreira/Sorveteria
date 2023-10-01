@@ -30,7 +30,6 @@ kind: Service
 metadata:
   name: produtos-service
 spec:
-  type: NodePort
   selector:
     app: produtos
   ports:
