@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: produtos
-        image: wallysf/sorveteria-produtos:v1.0
+        image: wallysf/sorveteria-produtos:v2
+        imagePullPolicy: Always
         env:
         - name: DB_URL
           value: db-service
