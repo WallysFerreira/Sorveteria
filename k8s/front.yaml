@@ -17,6 +17,7 @@ spec:
       containers:
       - name: front
         image: wallysf/sorveteria-front:v2
+        imagePullPolicy: Always
         env:
         - name: URL_PRODUTOS
           value: produtos-service
