@@ -19,7 +19,7 @@ spec:
         image: wallysf/sorveteria-produtos:v1.0
         env:
         - name: DB_URL
-          value: db
+          value: db-service
         ports:
         - containerPort: 80
 
