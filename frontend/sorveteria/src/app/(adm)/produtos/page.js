@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 // Lista dos produtos com botão pra apagar e pra editar
 
 import { getListaProdutos } from "@/app/cardapio/[categoria]/page"

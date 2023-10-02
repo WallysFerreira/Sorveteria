@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  labels:
+    app: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: Produtos
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+          - name: mysql-initdb
+            mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mysql-initdb
+          configMap:
+            name: mysql-initdb-config
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-config
+data:
+  initdb.sql: |
+    USE Produtos;
+    CREATE TABLE IF NOT EXISTS Produtos (
+      ID INT PRIMARY KEY AUTO_INCREMENT,
+      categoria varchar(20),
+      nome varchar(30),
+      preco float,
+      descricao varchar(50),
+      foto varchar(20)
+    );
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+spec:
+  selector:
+    app: db
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
