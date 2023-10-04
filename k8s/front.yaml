@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: front
-        image: wallysf/sorveteria-front:v2
+        image: wallysf/sorveteria-front:v3
         imagePullPolicy: Always
         env:
         - name: URL_PRODUTOS
