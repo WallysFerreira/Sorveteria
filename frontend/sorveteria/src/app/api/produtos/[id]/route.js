@@ -34,7 +34,7 @@ export async function PUT(req, { params }) {
         'foto': foto
     }
 
-    const res = await fetch(`http://produtos-service:80/api/produtos${params.id}`, {
+    const res = await fetch(`http://produtos-service:80/api/produtos/${params.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
