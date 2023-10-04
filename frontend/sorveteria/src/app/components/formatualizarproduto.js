@@ -5,9 +5,24 @@ export default function FormAtualizarProduto({ produto }) {
         e.preventDefault()
 
         const formData = new FormData(document.getElementById('formAtualizar'))
-        await fetch(`http://produtos-service:80/api/produtos/${produto.id}`, {
+
+        const categoria = formData.get('categoria').length != 0 ? formData.get('categoria') : produto.categoria
+        const nome = formData.get('nome').length != 0 ? formData.get('nome') : produto.nome
+        const preco = !isNaN(parseFloat(formData.get('preco'))) ? parseFloat(formData.get('preco')) : produto.preco
+        const descricao = formData.get('descricao').length != 0 ? formData.get('descricao') : produto.descricao
+        const foto = formData.get('foto').length != 0 ? formData.get('foto') : produto.foto
+
+        const json = {
+            'categoria': categoria,
+            'nome': nome,
+            'preco': preco,
+            'descricao': descricao,
+            'foto': foto
+        }
+
+        await fetch(`/api/produtos/${produto.id}`, {
             method: 'PUT',
-            body: formData,
+            body: JSON.stringify(json),
         })
     }
 

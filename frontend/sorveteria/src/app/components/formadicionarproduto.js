@@ -1,6 +1,16 @@
 export default function FormAdicionarProduto({ styling }) {
+    const enviar = async (e) => {
+        e.preventDefault()
+
+        const formData = new formData(document.getElementById('formAdicionar'))
+        await fetch('/api/produtos', {
+            method: 'POST',
+            body: formData
+        })
+    }
+
     return (
-        <form action={`http://produtos-service:80/api/produtos`} method="post" id="adicionarProduto" className={styling}>
+        <form action={enviar} method="post" id="formAdicionar" className={styling}>
             <div className="flex flex-col">
             <label htmlFor="categoria">Categoria</label>
             <input className="border" id="categoria" name="categoria" ></input>
