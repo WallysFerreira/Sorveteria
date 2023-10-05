@@ -1,6 +1,6 @@
 # Equipe
 - Aira Soares
-- Gleice Kettoly
+- Gleice Santos
 - Hugo Davi
 - Thayssa Alexandre
 - Wallys Ferreira
