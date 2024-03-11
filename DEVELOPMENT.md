@@ -90,9 +90,9 @@ Mainly takes care of user signup and login.
 
 Stores a new account in the database. Used for signup
 
-#### getAccount(account)
+#### validateAccount(account)
 
-Retrieves an account from the database if an account with the name exists and passwords match.
+Checks if an account with matching name and password exists on the database.
 
 Used for login.
 
