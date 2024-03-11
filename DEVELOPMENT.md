@@ -1,6 +1,6 @@
 # Design 
 
-![System diagram](https://github.com/WallysFerreira/Sorveteria/assets/105322824/fb746c95-a00a-4fb4-8fa0-7cc4e5b07048)
+![System diagram](https://github.com/WallysFerreira/Sorveteria/assets/105322824/b667f228-4ceb-47d5-994d-546e1bc9c821)
 
 ## Services
 
@@ -98,7 +98,7 @@ Used for login.
 
 The value of ID in the object will be null.
 
-#### deleteAccount(accountID)
+#### deleteAccount()
 
 Deletes an account from the database.
 
