@@ -51,6 +51,38 @@ Deletes a purchase from the database.
 
 ### Products
 
+Deals with all products displayed on the products page of the website.
+
+All requests to this service must: 
+
+- have an userID cookie
+- have an authToken cookie
+
+The session must be validated with the Auth service before doing anything.
+
+#### Product object
+
+```json
+{
+    "ID": ID of product,
+    "name": string,
+    "price": float,
+    "category": string, 
+}
+```
+
+#### getProducts()
+
+Fetches all products from the database.
+
+#### createProduct(product)
+
+Stores a new product in the database.
+
+#### deleteProduct(productID)
+
+Deletes a product from the database.
+
 ### Accounts
 
 ### Auth
