@@ -113,7 +113,7 @@ Requests must have:
 
 Used to guarantee authenticity for users.
 
-Uses a Redis database to store 14 characters long random string as key and the accountID as value.
+Uses a Redis database to store 6 characters long random string as key and the accountID as value.
 
 #### Token object
 
@@ -126,7 +126,7 @@ Uses a Redis database to store 14 characters long random string as key and the a
 
 #### generateToken(token)
 
-Generates a 14 characters long random string and stores it as key on a key-value database with the accountID as value.
+Generates a 6 characters long random string and stores it as key on a key-value database with the accountID as value.
 
 Used on login.
 
