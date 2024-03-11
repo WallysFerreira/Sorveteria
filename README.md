@@ -85,6 +85,41 @@ Deletes a product from the database.
 
 ### Accounts
 
+Mainly takes care of user signup and login.
+
+#### Account object
+
+```json
+{
+    "ID": account ID,
+    "name": string,
+    "password": string,
+}
+```
+
+#### createAccount(account)
+
+Stores a new account in the database. Used for signup
+
+#### getAccount(account)
+
+Retrieves an account from the database if an account with the name exists and passwords match.
+
+Used for login.
+
+The value of ID in the object will be null.
+
+#### deleteAccount(accountID)
+
+Deletes an account from the database.
+
+Used to delete the account that is logged in.
+
+Requests must have:
+
+- A valid token in the authToken cookie.
+- An ID in the userID cookie that is the same as the account ID being deleted.
+
 ### Auth
 
 ## Equipe
