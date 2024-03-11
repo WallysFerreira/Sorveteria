@@ -85,6 +85,18 @@ Deletes a product from the database.
 
 ### Accounts
 
+Mainly takes care of user signup and login.
+
+#### Account object
+
+```json
+{
+    "ID": account ID,
+    "name": string,
+    "password": string,
+}
+```
+
 ### Auth
 
 ## Equipe
