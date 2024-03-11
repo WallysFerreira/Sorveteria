@@ -122,6 +122,35 @@ Requests must have:
 
 ### Auth
 
+Used to guarantee authenticity for users.
+
+Uses a Redis database to store 14 characters long random string as key and the accountID as value.
+
+#### Token object
+
+```json
+{
+    "authToken": string,
+    "accountID": string,
+}
+```
+
+#### generateToken(token)
+
+Generates a 14 characters long random string and stores it as key on a key-value database with the accountID as value.
+
+Used on login.
+
+authToken on request token object is null.
+
+#### validateToken(token)
+
+Checks if the token is currently on the database and the accountID is the same.
+
+#### deleteToken(token)
+
+Checks that the accountID matches and then deletes the token from the database.
+
 ## Equipe
 - Aira Soares
 - Gleice Santos
