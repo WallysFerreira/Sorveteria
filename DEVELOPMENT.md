@@ -19,10 +19,10 @@ The session must be validated with the Auth service before doing anything.
 
 ```json
 {
-    "ID": ID of purchase,
-    "products": [list of products],
+    "ID": string,
+    "products": [Product],
     "created-at": time,
-    "userID": ID of user who made the purchase,
+    "userID": string,
 }
 ```
 
@@ -53,7 +53,7 @@ The session must be validated with the Auth service before doing anything.
 
 ```json
 {
-    "ID": ID of product,
+    "ID": string,
     "name": string,
     "price": float,
     "category": string, 
@@ -80,7 +80,7 @@ Mainly takes care of user signup and login.
 
 ```json
 {
-    "ID": account ID,
+    "ID": string,
     "name": string,
     "password": string,
 }
