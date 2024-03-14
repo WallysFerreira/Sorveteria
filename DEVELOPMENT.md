@@ -140,3 +140,13 @@ Checks if the token is currently on the database and the accountID is the same.
 
 Checks that the accountID matches and then deletes the token from the database.
 
+## Action examples
+
+### User login
+
+![Login diagram](https://github.com/WallysFerreira/Sorveteria/assets/105322824/84106c26-7e24-4d9c-8f05-f0123e61f7d2)
+
+### Accessing pages
+
+![Accessing_pages diagram](https://github.com/WallysFerreira/Sorveteria/assets/105322824/1423e802-b480-47c0-a0ba-1c274e3f79c1)
+
