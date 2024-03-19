@@ -3,3 +3,5 @@
 [Dd]ebug/
 
 **/Debug
+
+.env
