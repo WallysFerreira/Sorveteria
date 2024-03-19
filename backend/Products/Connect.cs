@@ -1,23 +1,23 @@
 using Microsoft.AspNetCore.Mvc.Routing;
 using MySqlConnector;
-using Produtos.Models;
+using Products.Models;
 
-namespace Produtos;
+namespace Products;
 
-public class Conectar {
+public class Connect {
     static string url = Environment.GetEnvironmentVariable("DB_URL");
 
-    public static async Task<Produto?> Inserir(Produto prod) {
+    public static async Task<Product?> Insert(Product prod) {
         try {
             var connection = new MySqlConnection("Server="+url+";User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
-            var queryInsert = new MySqlCommand("INSERT INTO Produtos (Categoria, Nome, Preco, Descricao, Foto) VALUES (@c, @n, @p, @d, @f)", connection);
-            queryInsert.Parameters.AddWithValue("c", prod.Categoria);
-            queryInsert.Parameters.AddWithValue("n", prod.Nome);
-            queryInsert.Parameters.AddWithValue("p", prod.Preco);
-            queryInsert.Parameters.AddWithValue("d", prod.Descricao);
-            queryInsert.Parameters.AddWithValue("f", prod.Foto);
+            var queryInsert = new MySqlCommand("INSERT INTO Products (category, name, price, description, pic_url) VALUES (@c, @n, @p, @d, @u)", connection);
+            queryInsert.Parameters.AddWithValue("c", prod.Category);
+            queryInsert.Parameters.AddWithValue("n", prod.Name);
+            queryInsert.Parameters.AddWithValue("p", prod.Price);
+            queryInsert.Parameters.AddWithValue("d", prod.Description);
+            queryInsert.Parameters.AddWithValue("u", prod.PicUrl);
 
             await queryInsert.ExecuteNonQueryAsync();
 
@@ -25,10 +25,10 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            var querySelectUm = new MySqlCommand("SELECT ID FROM Produtos WHERE Nome = (@n)", connection);
-            querySelectUm.Parameters.AddWithValue("n", prod.Nome);
+            var querySelectOne = new MySqlCommand("SELECT ID FROM Products WHERE name = (@n)", connection);
+            querySelectOne.Parameters.AddWithValue("n", prod.Name);
 
-            var reader = await querySelectUm.ExecuteReaderAsync();
+            var reader = await querySelectOne.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
                 prod.Id = reader.GetInt16(0);
@@ -42,19 +42,20 @@ public class Conectar {
         return prod;
     }
 
-    public static async Task<Produto?> PegarUm(int id) {
-        Produto? prod = null;
+    public static async Task<Product?> GetOne(int id) {
+        Product? prod = null;
+
         try {
             var connection = new MySqlConnection("Server="+url+";User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
-            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
-            querySelectUm.Parameters.AddWithValue("p", id);
+            var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
+            querySelectOne.Parameters.AddWithValue("p", id);
 
-            var reader = await querySelectUm.ExecuteReaderAsync();
+            var reader = await querySelectOne.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
-                prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                prod = new Product(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
                 prod.Id = reader.GetInt16(0);
             }
 
@@ -66,20 +67,20 @@ public class Conectar {
         return prod;
     }
 
-    public static async Task<List<Produto>> PegarTodos() {
-        List<Produto> produtos = new();
+    public static async Task<List<Product>> GetAll() {
+        List<Product> products = new();
 
         try {
             var connection = new MySqlConnection("Server="+url+";User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
-            var querySelect = new MySqlCommand("SELECT * FROM Produtos", connection);
+            var querySelect = new MySqlCommand("SELECT * FROM Products", connection);
             var reader = await querySelect.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
-                Produto prod = new Produto(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
+                Product prod = new Product(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
                 prod.Id = reader.GetInt16(0);
-                produtos.Add(prod);
+                products.Add(prod);
             }
 
             connection.Close();
@@ -87,20 +88,20 @@ public class Conectar {
             Console.WriteLine(e);
         }
 
-        return produtos;
+        return products;
     }
 
-    public static async Task<Produto?> DeletarUm(int id) {
-        Produto? prod = null; 
+    public static async Task<Product?> DeleteOne(int id) {
+        Product? prod = null; 
 
         try {
             var connection = new MySqlConnection("Server="+url+";User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
-            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
-            querySelectUm.Parameters.AddWithValue("p", id);
+            var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
+            querySelectOne.Parameters.AddWithValue("p", id);
 
-            var reader = await querySelectUm.ExecuteReaderAsync();
+            var reader = await querySelectOne.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
@@ -115,7 +116,7 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            var queryDelete = new MySqlCommand("DELETE FROM Produtos WHERE ID = (@p)", connection);
+            var queryDelete = new MySqlCommand("DELETE FROM Products WHERE ID = (@p)", connection);
             queryDelete.Parameters.AddWithValue("p", id);
 
             await queryDelete.ExecuteNonQueryAsync();
@@ -124,20 +125,21 @@ public class Conectar {
         } catch (Exception e) {
             Console.WriteLine(e);
         }
+
         return prod;
     }
 
-    public static async Task<Produto?> AtualizarCampo(int id, string campo, string valor) {
-        Produto? prod = null; 
+    public static async Task<Product?> UpdateField(int id, string field, string val) {
+        Product? prod = null; 
 
         try {
             var connection = new MySqlConnection("Server="+url+";User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
-            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
-            querySelectUm.Parameters.AddWithValue("p", id);
+            var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
+            querySelectOne.Parameters.AddWithValue("p", id);
 
-            var reader = await querySelectUm.ExecuteReaderAsync();
+            var reader = await querySelectOne.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
@@ -151,9 +153,9 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            var queryUpdate = new MySqlCommand("UPDATE Produtos SET " + campo + " = @v WHERE ID = @p", connection);
+            var queryUpdate = new MySqlCommand("UPDATE Products SET " + field + " = @v WHERE ID = @p", connection);
             queryUpdate.Parameters.AddWithValue("p", id);
-            queryUpdate.Parameters.AddWithValue("v", campo != "preco" ? valor : float.Parse(valor));
+            queryUpdate.Parameters.AddWithValue("v", field != "price" ? val : float.Parse(val));
 
             await queryUpdate.ExecuteNonQueryAsync();
 
@@ -161,7 +163,7 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            reader = await querySelectUm.ExecuteReaderAsync();
+            reader = await querySelectOne.ExecuteReaderAsync();
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
                 prod.Id = reader.GetInt16(0);
@@ -175,17 +177,17 @@ public class Conectar {
         return prod;
     }
 
-    public static async Task<Produto?> AtualizarProduto(int id, Produto produto) {
-        Produto? prod = null; 
+    public static async Task<Product?> UpdateProduct(int id, Product product) {
+        Product? prod = null; 
 
         try {
             var connection = new MySqlConnection("Server="+url+";User ID=root;Password=root;Database=Produtos");
             await connection.OpenAsync();
 
-            var querySelectUm = new MySqlCommand("SELECT * FROM Produtos WHERE ID = (@p)", connection);
-            querySelectUm.Parameters.AddWithValue("p", id);
+            var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
+            querySelectOne.Parameters.AddWithValue("p", id);
 
-            var reader = await querySelectUm.ExecuteReaderAsync();
+            var reader = await querySelectOne.ExecuteReaderAsync();
 
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
@@ -199,13 +201,13 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            var queryUpdate = new MySqlCommand("UPDATE Produtos SET categoria = @c, nome = @n, descricao = @d, preco = @p, foto = @f WHERE ID = @i", connection);
+            var queryUpdate = new MySqlCommand("UPDATE Products SET category = @c, name = @n, description = @d, price = @p, pic_url = @u WHERE ID = @i", connection);
             queryUpdate.Parameters.AddWithValue("i", id);
-            queryUpdate.Parameters.AddWithValue("c", produto.Categoria);
-            queryUpdate.Parameters.AddWithValue("n", produto.Nome);
-            queryUpdate.Parameters.AddWithValue("d", produto.Descricao);
-            queryUpdate.Parameters.AddWithValue("p", produto.Preco);
-            queryUpdate.Parameters.AddWithValue("f", produto.Foto);
+            queryUpdate.Parameters.AddWithValue("c", product.Category);
+            queryUpdate.Parameters.AddWithValue("n", product.Name);
+            queryUpdate.Parameters.AddWithValue("d", product.Description);
+            queryUpdate.Parameters.AddWithValue("p", product.Price);
+            queryUpdate.Parameters.AddWithValue("u", product.PicUrl);
 
             await queryUpdate.ExecuteNonQueryAsync();
 
@@ -213,7 +215,7 @@ public class Conectar {
 
             await connection.OpenAsync();
 
-            reader = await querySelectUm.ExecuteReaderAsync();
+            reader = await querySelectOne.ExecuteReaderAsync();
             while (await reader.ReadAsync()) {
                 prod = new(reader.GetString(1), reader.GetString(2), reader.GetFloat(3), reader.GetString(4), reader.GetString(5));
                 prod.Id = reader.GetInt16(0);
