@@ -57,6 +57,8 @@ The session must be validated with the Auth service before doing anything.
     "name": string,
     "price": float,
     "category": string, 
+    "description": string,
+    "pic_url": string,
 }
 ```
 
