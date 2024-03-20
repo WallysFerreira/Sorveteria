@@ -9,7 +9,8 @@ A study about the microservices architecture.
 - NextJS
 - RabbitMQ
 - Redis
-- MariaDB
+- MongoDB
+- MySQL
 
 ## Development
 
