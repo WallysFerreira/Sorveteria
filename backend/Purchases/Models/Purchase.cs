@@ -7,12 +7,14 @@ public class Purchase {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
-    public string Usuario { get; set; }
-    public string Produto { get; set; }
+    public string UserID { get; set; }
+    public string[] Products { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public Purchase(string usuario, string produto){
-        this.Usuario = usuario;
-        this.Produto = produto;
+    public Purchase(string userID, string[] products){
+        this.UserID = userID;
+        this.Products = products;
+        this.CreatedAt = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Brazil/East"));
     }
 
 }
