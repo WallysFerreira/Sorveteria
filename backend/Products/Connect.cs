@@ -10,9 +10,14 @@ public class Connect {
     static string dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
     static string dbName = Environment.GetEnvironmentVariable("DB_NAME");
 
+    private static MySqlConnection createConnection() {
+        string connStr = String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName);
+        return new MySqlConnection(connStr);
+    }
+
     public static async Task<Product?> Insert(Product prod) {
         try {
-            var connection = new MySqlConnection(String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName));
+            var connection = createConnection();
             await connection.OpenAsync();
 
             var queryInsert = new MySqlCommand("INSERT INTO Products (category, name, price, description, pic_url) VALUES (@c, @n, @p, @d, @u)", connection);
@@ -49,7 +54,7 @@ public class Connect {
         Product? prod = null;
 
         try {
-            var connection = new MySqlConnection(String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName));
+            var connection = createConnection();
             await connection.OpenAsync();
 
             var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
@@ -74,7 +79,7 @@ public class Connect {
         List<Product> products = new();
 
         try {
-            var connection = new MySqlConnection(String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName));
+            var connection = createConnection();
             await connection.OpenAsync();
 
             var querySelect = new MySqlCommand("SELECT * FROM Products", connection);
@@ -98,7 +103,7 @@ public class Connect {
         Product? prod = null; 
 
         try {
-            var connection = new MySqlConnection(String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName));
+            var connection = createConnection();
             await connection.OpenAsync();
 
             var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
@@ -136,7 +141,7 @@ public class Connect {
         Product? prod = null; 
 
         try {
-            var connection = new MySqlConnection(String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName));
+            var connection = createConnection();
             await connection.OpenAsync();
 
             var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
@@ -184,7 +189,7 @@ public class Connect {
         Product? prod = null; 
 
         try {
-            var connection = new MySqlConnection(String.Format("Server={0};User ID={1};Password={2};Database={3}", dbUrl, dbUser, dbPassword, dbName));
+            var connection = createConnection();
             await connection.OpenAsync();
 
             var querySelectOne = new MySqlCommand("SELECT * FROM Products WHERE ID = (@p)", connection);
