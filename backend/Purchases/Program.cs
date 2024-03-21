@@ -1,14 +1,14 @@
-using Compras;
-using Compras.Models;
-using Compras.Services;
+using Purchases;
+using Purchases.Models;
+using Purchases.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<ComprasDatabaseConfig>(
-    builder.Configuration.GetSection("ComprasDatabase"));
+//builder.Services.Configure<PurchasesDatabaseConfig>(
+//    builder.Configuration.GetSection("PurchasesDatabase"));
 
-builder.Services.AddSingleton<ComprasService>();
+builder.Services.AddSingleton<PurchasesService>();
 
 builder.Services.AddControllers();
 builder.Services.AddControllers()
@@ -26,8 +26,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
 
 app.UseHttpsRedirection();
 
