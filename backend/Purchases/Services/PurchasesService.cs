@@ -9,8 +9,7 @@ public class PurchasesService
 {
     private readonly IMongoCollection<Purchase> _purchasesCollection;
 
-    public PurchasesService(
-        IOptions<PurchasesDatabaseConfig> purchasesDatabaseConfig)
+    public PurchasesService()
     {
         string dbUrl = Environment.GetEnvironmentVariable("DB_URL");
         string dbName = Environment.GetEnvironmentVariable("DB_NAME");
