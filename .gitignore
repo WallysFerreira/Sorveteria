@@ -5,3 +5,5 @@
 **/Debug
 
 .env
+.mono/
+Sorveteria.sln
