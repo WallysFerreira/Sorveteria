@@ -1,8 +1,8 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace Compras.Models;
-public class Compra {
+namespace Purchases.Models;
+public class Purchase {
 
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
@@ -10,7 +10,7 @@ public class Compra {
     public string Usuario { get; set; }
     public string Produto { get; set; }
 
-    public Compra(string usuario, string produto){
+    public Purchase(string usuario, string produto){
         this.Usuario = usuario;
         this.Produto = produto;
     }
