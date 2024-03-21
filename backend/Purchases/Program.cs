@@ -5,8 +5,8 @@ using Purchases.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<PurchasesDatabaseConfig>(
-    builder.Configuration.GetSection("PurchasesDatabase"));
+//builder.Services.Configure<PurchasesDatabaseConfig>(
+//    builder.Configuration.GetSection("PurchasesDatabase"));
 
 builder.Services.AddSingleton<PurchasesService>();
 

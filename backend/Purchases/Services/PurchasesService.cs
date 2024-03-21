@@ -12,14 +12,15 @@ public class PurchasesService
     public PurchasesService(
         IOptions<PurchasesDatabaseConfig> purchasesDatabaseConfig)
     {
-        var mongoClient = new MongoClient(
-            purchasesDatabaseConfig.Value.ConnectionString);
+        string dbUrl = Environment.GetEnvironmentVariable("DB_URL");
+        string dbName = Environment.GetEnvironmentVariable("DB_NAME");
+        string dbColName = Environment.GetEnvironmentVariable("DB_COL_NAME");
 
-        var mongoDatabase = mongoClient.GetDatabase(
-            purchasesDatabaseConfig.Value.DatabaseName);
+        var mongoClient = new MongoClient(dbUrl);
 
-        _purchasesCollection = mongoDatabase.GetCollection<Purchase>(
-            purchasesDatabaseConfig.Value.PurchasesCollectionName);
+        var mongoDatabase = mongoClient.GetDatabase(dbName);
+
+        _purchasesCollection = mongoDatabase.GetCollection<Purchase>(dbColName);
     }
 
     public async Task<List<Purchase>> GetAsync() =>
