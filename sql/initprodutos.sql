@@ -1,10 +1,12 @@
-USE Produtos;
+CREATE DATABASE IF NOT EXISTS Products;
 
-CREATE TABLE IF NOT EXISTS Produtos (
+USE Products;
+
+CREATE TABLE IF NOT EXISTS Products (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    categoria varchar(20),
-    nome varchar(30),
-    preco float,
-    descricao varchar(50),
-    foto varchar(20)
+    category varchar(20),
+    name varchar(30),
+    price float,
+    description varchar(50),
+    pic_url varchar(20)
 );
